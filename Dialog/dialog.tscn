@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbs48wcv28ark"]
+
+[ext_resource type="Script" uid="uid://cxe5v1rhx27w" path="res://Dialog/dialog.gd" id="1_yqm1q"]
+[ext_resource type="Texture2D" uid="uid://2k1n4bx1exve" path="res://assets/sprite(2).png" id="2_b2mf0"]
+[ext_resource type="FontFile" uid="uid://cnoanqonredau" path="res://assets/font/PressStart2P-Regular.ttf" id="3_olscm"]
+
+[node name="DialogBox" type="CanvasLayer"]
+script = ExtResource("1_yqm1q")
+
+[node name="Panel" type="Panel" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(0, 50)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 12.0
+grow_horizontal = 2
+scale = Vector2(6.395, 6.395)
+texture = ExtResource("2_b2mf0")
+expand_mode = 5
+stretch_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_olscm")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

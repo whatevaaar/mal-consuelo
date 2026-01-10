@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0jrkfo8sleym"]
+
+[ext_resource type="Texture2D" uid="uid://bnaipgmh4ll52" path="res://assets/urizen_onebit_tileset__v2d0.png" id="1_6loxa"]
+[ext_resource type="Script" uid="uid://cxko0o2yvvphg" path="res://Enemigos/enemigo.gd" id="1_73ngn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6loxa"]
+atlas = ExtResource("1_6loxa")
+region = Rect2(1379.0065, 469.1816, 11.899292, 11.8993225)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73ngn"]
+size = Vector2(8.25, 8.5)
+
+[node name="enemigo" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_73ngn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5.9604645e-08, -1.1920929e-07)
+scale = Vector2(1.1704545, 1.1704545)
+texture = SubResource("AtlasTexture_6loxa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_73ngn")
