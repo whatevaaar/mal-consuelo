@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameState="*res://core/GameState.gd"
-NarrativeManager="*res://systems/NarrativeManager.gd"
+GameState="*res://Core/GameState.gd"
+NarrativeManager="*res://Systems/NarrativeManager.gd"
 
 [display]
 

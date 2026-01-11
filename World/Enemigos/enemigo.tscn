@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b0jrkfo8sleym"]
 
 [ext_resource type="Texture2D" uid="uid://bnaipgmh4ll52" path="res://assets/urizen_onebit_tileset__v2d0.png" id="1_6loxa"]
-[ext_resource type="Script" uid="uid://cxko0o2yvvphg" path="res://Enemigos/enemigo.gd" id="1_73ngn"]
+[ext_resource type="Script" uid="uid://cxko0o2yvvphg" path="res://World/Enemigos/enemigo.gd" id="1_73ngn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6loxa"]
 atlas = ExtResource("1_6loxa")

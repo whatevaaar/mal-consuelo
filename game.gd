@@ -1,7 +1,9 @@
 extends Node2D
 
-@export var enemy_scene: PackedScene = preload("res://Enemigos/enemigo.tscn")
-@export var dialog_scene: PackedScene = preload("res://Dialog/dialog.tscn")
+@export var enemy_scene: PackedScene = preload("res://World/Enemigos/enemigo.tscn")
+@export var dialog_scene: PackedScene = preload("res://UI/Dialog/dialog.tscn")
+@onready var end_screen: CanvasLayer = $EndScreen
+@onready var end_root: Panel = $EndScreen/Panel
 
 @export var spawn_timer_sec := 30.0
 @export var phase_timer: Timer
@@ -14,11 +16,11 @@ extends Node2D
 @export var night_duration := 15.0
 @export var end_duration := 3.0
 
-
-
-
 func _ready():
-	var hud = preload("res://hud/HUD.tscn").instantiate()
+	player.died.connect(_on_player_died)
+	end_screen.visible = false
+	
+	var hud = preload("res://UI/hud/HUD.tscn").instantiate()
 	add_child(hud)
 	
 	var timer = Timer.new()
@@ -43,14 +45,28 @@ func _ready():
 func _spawn_enemy():
 	if not enemy_scene or GameState.phase != GameState.Phase.NIGHT:
 		return
+
 	var e = enemy_scene.instantiate()
-	e.global_position = Vector2(randf_range(0, 200), randf_range(0, 200))  # dentro del mapa
+
+	var viewport_rect = get_viewport().get_visible_rect()
+
+	var spawn_margin := 40
+	var bottom_band_height := 80
+
+	var x = viewport_rect.position.x
+
+	var y = viewport_rect.position.y + 100
+
+	e.global_position = Vector2(x, y)
 	e.target = player
 	e.add_to_group("enemies")
 	enemies.add_child(e)
+
 	show_dialog(["Ya vienen..."])
 
 func show_dialog(lines: Array[String]):
+	if player.died:
+		return
 	var dialog = dialog_scene.instantiate()
 	dialog.lines = lines
 	add_child(dialog)
@@ -76,3 +92,12 @@ func _on_game_ending():
 		show_dialog(["La tierra reclamó lo que quedaba."])
 	else:
 		show_dialog(["El rancho sigue en pie, pero no hay a quién volver."])
+
+
+func _on_player_died():
+	end_screen.visible = true
+	end_root.modulate.a = 0.0
+
+	var tween = create_tween()
+	tween.tween_property(end_root, "modulate:a", 1.0, 2.0)
+	end_screen.show_ending()

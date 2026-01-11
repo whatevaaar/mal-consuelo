@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var target: Node2D
-@export var bullet_scene: PackedScene = preload("res://Bala/bala.tscn")
+@export var bullet_scene: PackedScene = preload("res://World/Bala/bala.tscn")
 @export var speed := 120
 @export var shoot_interval := 2.0
 
@@ -59,3 +59,6 @@ func shoot():
 	b.direction = (target.global_position - global_position).normalized()
 	b.is_player_bullet = false
 	get_parent().get_node("../Bullets").add_child(b)
+
+func die():
+	queue_free()

@@ -16,6 +16,17 @@ var wounds := 0
 var nostalgia := 0      # salud mental (sube con recuerdos, baja con tiempo)
 var hunger := 0 
 
+var enemies_killed := 0
+var shots_fired := 0
+var shots_hit := 0
+var time_alive := 0.0
+var cause_of_death := ""
+
+func accuracy() -> float:
+	if shots_fired == 0:
+		return 0.0
+	return float(shots_hit) / shots_fired
+
 func reset():
 	day = 1
 	phase = Phase.DAY

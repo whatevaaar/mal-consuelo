@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://br4vn5kv8ayub"]
 
-[ext_resource type="Script" uid="uid://bu6ihar8q157c" path="res://Bala/bala.gd" id="1_kaplu"]
+[ext_resource type="Script" uid="uid://bu6ihar8q157c" path="res://World/Bala/bala.gd" id="1_kaplu"]
 [ext_resource type="Texture2D" uid="uid://bnaipgmh4ll52" path="res://assets/urizen_onebit_tileset__v2d0.png" id="1_tsn13"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kaplu"]

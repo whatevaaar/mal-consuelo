@@ -1,10 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://der5qrmg1hniy"]
+[gd_scene load_steps=4 format=3 uid="uid://der5qrmg1hniy"]
 
-[ext_resource type="Script" uid="uid://d32a5oyi6s4lv" path="res://hud/HUD.gd" id="1_g1j8k"]
-[ext_resource type="FontFile" uid="uid://cnoanqonredau" path="res://assets/font/PressStart2P-Regular.ttf" id="2_xx08g"]
-
-[sub_resource type="Theme" id="Theme_yulwx"]
-default_font = ExtResource("2_xx08g")
+[ext_resource type="Script" uid="uid://d32a5oyi6s4lv" path="res://UI/hud/HUD.gd" id="1_g1j8k"]
+[ext_resource type="Theme" uid="uid://b0mie5gtu0w1s" path="res://UI/EndScreen/end_screen.tres" id="2_xx08g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xx08g"]
 
@@ -19,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = SubResource("Theme_yulwx")
+theme = ExtResource("2_xx08g")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_xx08g")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
