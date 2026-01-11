@@ -1,20 +1,81 @@
 extends CanvasLayer
 
-@onready var day_label := $Panel/HBoxContainer/DayLabel
-@onready var nostalgia_label := $Panel/HBoxContainer/NostalgiaLabel
-@onready var wounds_label := $Panel/HBoxContainer/WoundsLabel
-@onready var hunger_label := $Panel/HBoxContainer/HungerLabel
+@onready var container := $Panel/HBoxContainer
+
+# definición de lo que el HUD muestra
+var stats := [
+	{
+		"id": "food",
+		"label": "Comida",
+		"mode": "number"
+	},
+	{
+		"id": "hunger",
+		"label": "Hambre",
+		"mode": "bars",
+		"max": 6
+	},
+	{
+		"id": "ammo",
+		"label": "Balas",
+		"mode": "bars",
+		"max": GameState.MAX_AMMO
+	}
+]
+
+var labels := {}  # id → RichTextLabel
 
 func _ready():
-	GameState.day_changed.connect(_update)
+	_build_hud()
+
+	GameState.ammo_changed.connect(_update)
 	GameState.stats_changed.connect(_update)
+
 	_update()
 
-func _update(_arg = null):
-	day_label.text = "Día " + str(GameState.day)
-	nostalgia_label.text = "Nostalgia: " + _bars(GameState.nostalgia)
-	wounds_label.text = "Heridas: " + _bars(GameState.wounds)
-	hunger_label.text = "Hambre: " + _bars(GameState.hunger)
 
-func _bars(value: int) -> String:
-	return "■".repeat(value)
+# ------------------------
+# CONSTRUCCIÓN
+# ------------------------
+func _build_hud():
+	for stat in stats:
+		var rtl := RichTextLabel.new()
+		rtl.fit_content = true
+		rtl.scroll_active = false
+		rtl.bbcode_enabled = true
+		rtl.custom_minimum_size.x = 120
+
+		container.add_child(rtl)
+		labels[stat.id] = rtl
+
+
+# ------------------------
+# UPDATE
+# ------------------------
+func _update(_arg = null):
+	for stat in stats:
+		var id = stat.id
+		var rtl: RichTextLabel = labels[id]
+
+		match id:
+			"food":
+				rtl.text = "[b]%s: %d" % [stat.label, GameState.food]
+
+			"hunger":
+				rtl.text = "[b]%s: %s" % [
+					stat.label,
+					_bars(GameState.hunger, stat.max)
+				]
+
+			"ammo":
+				rtl.text = "[b]%s: %s" % [
+					stat.label,
+					_bars(GameState.ammo, stat.max)
+				]
+
+
+# ------------------------
+# HELPERS
+# ------------------------
+func _bars(value: int, max: int) -> String:
+	return "■".repeat(value) + "□".repeat(max - value)

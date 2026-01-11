@@ -2,6 +2,8 @@ extends Node2D
 
 @export var enemy_scene: PackedScene = preload("res://World/Enemigos/enemigo.tscn")
 @export var dialog_scene: PackedScene = preload("res://UI/Dialog/dialog.tscn")
+@export var rabbit_scene: PackedScene = preload("res://World/Conejo/conejo.tscn")
+
 @onready var end_screen: CanvasLayer = $EndScreen
 @onready var end_root: Panel = $EndScreen/Panel
 
@@ -16,10 +18,14 @@ extends Node2D
 @export var night_duration := 15.0
 @export var end_duration := 3.0
 
+@onready var conejos = $Conejos
+@export var rabbits_per_day := 3
+
+
 func _ready():
 	player.died.connect(_on_player_died)
 	end_screen.visible = false
-	
+
 	var hud = preload("res://UI/hud/HUD.tscn").instantiate()
 	add_child(hud)
 	
@@ -46,23 +52,22 @@ func _spawn_enemy():
 	if not enemy_scene or GameState.phase != GameState.Phase.NIGHT:
 		return
 
+	var viewport := get_viewport().get_visible_rect()
+	var margin := 40
+
 	var e = enemy_scene.instantiate()
 
-	var viewport_rect = get_viewport().get_visible_rect()
+	e.global_position = Vector2(
+		randf_range(margin, viewport.size.x - margin),
+		viewport.size.y + 64  # fuera de vista
+	)
 
-	var spawn_margin := 40
-	var bottom_band_height := 80
-
-	var x = viewport_rect.position.x
-
-	var y = viewport_rect.position.y + 100
-
-	e.global_position = Vector2(x, y)
 	e.target = player
 	e.add_to_group("enemies")
 	enemies.add_child(e)
 
 	show_dialog(["Ya vienen..."])
+
 
 func show_dialog(lines: Array[String]):
 	if player.died:
@@ -76,6 +81,7 @@ func _on_phase_changed(phase):
 		GameState.Phase.DAY:
 			phase_timer.start(day_duration)
 			show_dialog(["Día " + str(GameState.day)])
+			_spawn_rabbits()
 		GameState.Phase.DUSK:
 			phase_timer.start(dusk_duration)
 			show_dialog(["El sol cae sobre la tierra seca."])
@@ -101,3 +107,11 @@ func _on_player_died():
 	var tween = create_tween()
 	tween.tween_property(end_root, "modulate:a", 1.0, 2.0)
 	end_screen.show_ending()
+
+func _spawn_rabbits():
+	var margin := 40
+
+	for i in rabbits_per_day:
+		var r = rabbit_scene.instantiate()
+		r.global_position = Vector2(0,0)
+		conejos.add_child(r)

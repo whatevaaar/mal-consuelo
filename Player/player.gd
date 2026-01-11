@@ -70,17 +70,18 @@ func shoot(target_pos: Vector2):
 	if not bullet_scene:
 		return
 
+	if not GameState.can_shoot():
+		return
+
+	GameState.spend_ammo()
+
 	var b = bullet_scene.instantiate()
 	b.global_position = global_position
 	b.direction = (target_pos - global_position).normalized()
-	anim.flip_h = b.direction.x < 0
 	b.is_player_bullet = true
 	get_parent().get_node("Bullets").add_child(b)
 
 
-# -------------------------
-# ANIMATIONS
-# -------------------------
 func _play_walk(dir: Vector2):
 	anim.play("walking")
 	if abs(dir.x) > 0.1:
@@ -105,15 +106,10 @@ func _play_shoot():
 		if not anim.animation_finished.is_connected(_on_shoot_finished):
 			anim.animation_finished.connect(_on_shoot_finished, CONNECT_ONE_SHOT)
 
-
 func _on_shoot_finished():
 	if state != State.DEAD:
 		state = State.IDLE
 
-
-# -------------------------
-# DEATH
-# -------------------------
 func die():
 	if state == State.DEAD:
 		return

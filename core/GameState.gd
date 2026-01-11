@@ -4,9 +4,13 @@ signal phase_changed(phase)
 signal day_changed(day)
 signal game_ended
 signal stats_changed
+signal ammo_changed
 
 enum Phase { DAY, DUSK, NIGHT, END }
 
+const MAX_AMMO := 6
+
+var ammo := MAX_AMMO
 var day := 1
 var max_days := 3
 var phase := Phase.DAY
@@ -67,7 +71,9 @@ func next_day():
 		emit_signal("phase_changed", phase)
 
 func add_food(amount := 1):
+	var temp_hunger = hunger
 	hunger = max(hunger - amount, 0)
+	food += max(amount - temp_hunger, 0)
 	emit_signal("stats_changed")
 
 func add_nostalgia(amount := 1):
@@ -77,3 +83,13 @@ func add_nostalgia(amount := 1):
 func add_wound(amount := 1):
 	wounds += amount
 	emit_signal("stats_changed")
+
+func can_shoot() -> bool:
+	return ammo > 0
+
+func spend_ammo():
+	if ammo <= 0:
+		return false
+	ammo -= 1
+	ammo_changed.emit(ammo)
+	return true
