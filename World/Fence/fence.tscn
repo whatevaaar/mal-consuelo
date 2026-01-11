@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck8j76r6yhn26"]
+[gd_scene load_steps=8 format=3 uid="uid://ck8j76r6yhn26"]
 
 [ext_resource type="Texture2D" uid="uid://bnaipgmh4ll52" path="res://assets/urizen_onebit_tileset__v2d0.png" id="1_002ho"]
-[ext_resource type="Script" uid="uid://c2av61u4f2uyj" path="res://World/Fence/area_2d.gd" id="1_h05xo"]
+[ext_resource type="Script" uid="uid://ckw8lo5b0b3ql" path="res://World/Fence/fence.gd" id="1_3x7i6"]
+[ext_resource type="Script" uid="uid://0ddqgnhgjdid" path="res://World/Fence/fence_block.gd" id="3_3x7i6"]
+
+[sub_resource type="GDScript" id="GDScript_h05xo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h05xo"]
 atlas = ExtResource("1_002ho")
@@ -14,10 +17,11 @@ size = Vector2(11.75, 11)
 size = Vector2(11, 8.5)
 
 [node name="Fence" type="Node2D"]
+script = ExtResource("1_3x7i6")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
-script = ExtResource("1_h05xo")
+script = SubResource("GDScript_h05xo")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
 texture = SubResource("AtlasTexture_h05xo")
@@ -29,6 +33,7 @@ shape = SubResource("RectangleShape2D_3x7i6")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 8
+script = ExtResource("3_3x7i6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 0.75)
