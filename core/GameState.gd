@@ -26,6 +26,9 @@ var shots_hit := 0
 var time_alive := 0.0
 var cause_of_death := ""
 
+func _ready() -> void:
+	reset()
+
 func accuracy() -> float:
 	if shots_fired == 0:
 		return 0.0

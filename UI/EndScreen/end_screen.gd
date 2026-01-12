@@ -11,3 +11,10 @@ func show_ending():
 	text_label.text = ending.text
 
 	visible = true
+
+func _on_restart_pressed():
+	get_tree().change_scene_to_file("res://game.tscn")
+
+
+func _on_button_pressed() -> void:
+	_on_restart_pressed()
