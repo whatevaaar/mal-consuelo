@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c754y0q24cb5i"]
+
+[ext_resource type="Texture2D" uid="uid://bt2qr203n1ywi" path="res://assets/luz.webp" id="1_serwe"]
+[ext_resource type="Texture2D" uid="uid://ds2kyrf7iho0d" path="res://assets/sprites/sprite_8652.png" id="2_1am6n"]
+
+[node name="Fogata" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(59, -2)
+texture = ExtResource("2_1am6n")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(61, 0)
+color = Color(1, 0.14509805, 0, 1)
+energy = 1.05
+shadow_enabled = true
+texture = ExtResource("1_serwe")
+texture_scale = 0.3

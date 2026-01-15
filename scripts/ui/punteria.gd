@@ -24,7 +24,6 @@ func activate():
 func _ready():
 	visible = false
 
-
 func _calculate_limits():
 	var barra_h = barra_centro.size.y
 	var mira_h = mira.size.y

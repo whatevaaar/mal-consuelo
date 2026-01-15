@@ -15,6 +15,8 @@ func _ready() -> void:
 		enemy.connect("clicked", Callable(self, "_on_enemy_clicked"))
 
 func _physics_process(_delta: float) -> void:
+	if apuntando:
+		return
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED

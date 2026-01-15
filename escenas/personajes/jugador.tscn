@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bol5mk55gcp2o"]
+[gd_scene load_steps=11 format=3 uid="uid://bol5mk55gcp2o"]
 
 [ext_resource type="Texture2D" uid="uid://ca4emk6twrfl6" path="res://assets/sprites/sprite_9581.png" id="1_5qb2f"]
 [ext_resource type="Script" uid="uid://dl5rd446fifgx" path="res://scripts/personajes/jugador.gd" id="1_obvt7"]
@@ -44,6 +44,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v5a5"]
 size = Vector2(4, 10.5)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ibdfn"]
+cull_mode = 1
+polygon = PackedVector2Array(2, 1, -1, 1, -1, 4, 2, 4)
+
 [node name="Jugador" type="CharacterBody2D"]
 script = ExtResource("1_obvt7")
 
@@ -64,3 +68,7 @@ offset_top = -4.0
 offset_right = -11.000004
 offset_bottom = -4.0
 scale = Vector2(0.21, 0.21)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(0, 2)
+occluder = SubResource("OccluderPolygon2D_ibdfn")

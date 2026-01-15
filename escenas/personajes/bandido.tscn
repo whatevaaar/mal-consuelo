@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4dqnsh2uhrbc"]
+[gd_scene load_steps=6 format=3 uid="uid://d4dqnsh2uhrbc"]
 
 [ext_resource type="Texture2D" uid="uid://c0j2hj5lkiclq" path="res://assets/sprites/sprite_7522.png" id="1_4ljcw"]
 [ext_resource type="Script" uid="uid://i2dy3xe13o7d" path="res://scripts/personajes/bandido.gd" id="1_r4nfx"]
@@ -17,6 +17,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r4nfx"]
+polygon = PackedVector2Array(3, -1, 6, -1, 6, 2, 3, 2)
+
 [node name="bandido" type="CharacterBody2D"]
 script = ExtResource("1_r4nfx")
 
@@ -32,3 +35,7 @@ sprite_frames = SubResource("SpriteFrames_r4nfx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.25, 1.5)
 shape = SubResource("RectangleShape2D_7cxj6")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(-4, 4)
+occluder = SubResource("OccluderPolygon2D_r4nfx")

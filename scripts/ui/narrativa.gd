@@ -1,6 +1,6 @@
 extends Control
 
-@onready var label: RichTextLabel = $RichTextLabel
+@onready var label: RichTextLabel = $MarginContainer/RichTextLabel
 
 var text_queue: Array = []
 var typing_speed := 0.03

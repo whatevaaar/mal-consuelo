@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfurw3o64vjyq"]
+[gd_scene load_steps=3 format=3 uid="uid://bfurw3o64vjyq"]
 
 [ext_resource type="Script" uid="uid://6lipxeswa5tv" path="res://scripts/ui/narrativa.gd" id="1_7i888"]
+[ext_resource type="Theme" uid="uid://dkhuh8afmfku" path="res://assets/themes/tema_retro.tres" id="2_vydig"]
 
 [node name="Narrativa" type="Control"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
@@ -13,10 +14,20 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_7i888")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_vydig")
+bbcode_enabled = true
+vertical_alignment = 1
