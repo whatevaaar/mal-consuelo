@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://cohbvn05xs52u"]
+
+[ext_resource type="Script" uid="uid://ccmeo5uih5ut0" path="res://scripts/ui/punteria.gd" id="1_o5wwy"]
+[ext_resource type="Texture2D" uid="uid://cnalxrm6hwch0" path="res://assets/sprites/sprite_6897.png" id="2_ccuhy"]
+
+[node name="Punteria" type="Control"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_o5wwy")
+
+[node name="Barra" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -20.0
+offset_right = 8.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.047058824, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Barra"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="BarraCentro" type="ColorRect" parent="Barra/MarginContainer"]
+layout_mode = 2
+
+[node name="zona_acierto" type="ColorRect" parent="Barra/MarginContainer/BarraCentro"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0.2109592, 0.9815763, 0, 1)
+
+[node name="sprite_mira" type="TextureRect" parent="Barra"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ccuhy")

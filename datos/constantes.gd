@@ -1,0 +1,1 @@
+const VELOCIDAD_HUMANO = 100
