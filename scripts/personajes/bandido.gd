@@ -1,31 +1,19 @@
 extends CharacterBody2D
-class_name Bandido
 
-## Estado básico
-@export var vida := 1
-var vivo := true
+var alive := true
+signal clicked(enemy)
 
-@onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var area := $Area2D  # tu Area2D dentro del body
 
+func _ready():
+	add_to_group("enemigos")
+	# conectar la señal input_event del Area2D
+	area.connect("input_event", Callable(self, "_on_area_input"))
 
-func _ready() -> void:
-	# El bandido no hace nada al iniciar.
-	# Su presencia ya es amenaza suficiente.
-	pass
+func _on_area_input(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		emit_signal("clicked", self)
 
-
-func recibir_disparo() -> void:
-	if not vivo:
-		return
-
-	vivo = false
-	vida -= 1
-
-	# Feedback mínimo, seco
-	_on_morir()
-
-
-func _on_morir() -> void:
-	# Nada heroico.
-	# Sin animación por ahora.
+func die():
+	alive = false
 	queue_free()

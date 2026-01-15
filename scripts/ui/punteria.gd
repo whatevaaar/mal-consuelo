@@ -1,37 +1,37 @@
 extends Control
 
 @export var speed := 6.0
-@export var tick := 0.016
+@export var tick := .1
 
 @onready var barra_centro := $Barra/MarginContainer/BarraCentro
 @onready var mira := barra_centro.get_node("sprite_mira")
 @onready var zona := barra_centro.get_node("zona_acierto")
 
 var dir := 1
-var activo := true
+var activo := false
 var min_y := 0.0
 var max_y := 0.0
 
 signal resolved(success: bool)
 
-func _ready():
-	set_anchors_preset(Control.PRESET_FULL_RECT)
-	mira.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
-	mira.position = Vector2(mira.position.x, 0)
-
-	await resized
+func activate():
+	visible = true
+	activo = true
+	await get_tree().process_frame
 	_calculate_limits()
 	_start_timer()
+
+func _ready():
+	visible = false
+
 
 func _calculate_limits():
 	var barra_h = barra_centro.size.y
 	var mira_h = mira.size.y
 
-	min_y = 0.0
+	min_y = -1
 	max_y = barra_h - mira_h
-
-	mira.position.y = clampf(mira.position.y, min_y, max_y)
-
+	
 func _start_timer():
 	var t := Timer.new()
 	t.wait_time = tick
@@ -62,3 +62,5 @@ func _check_hit():
 func _resolve(success: bool):
 	activo = false
 	emit_signal("resolved", success)
+
+ 
