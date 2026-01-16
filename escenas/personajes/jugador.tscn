@@ -53,14 +53,11 @@ script = ExtResource("1_obvt7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_574y0")
-animation = &"idle"
+animation = &"disparo"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.25)
 shape = SubResource("RectangleShape2D_4v5a5")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(8, 8)
 
 [node name="Punteria" parent="." instance=ExtResource("7_ibdfn")]
 offset_left = -11.000004
@@ -72,3 +69,6 @@ scale = Vector2(0.21, 0.21)
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(0, 2)
 occluder = SubResource("OccluderPolygon2D_ibdfn")
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(5, 0)
