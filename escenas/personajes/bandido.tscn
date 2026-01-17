@@ -32,6 +32,18 @@ polygon = PackedVector2Array(3, -1, 6, -1, 6, 2, 3, 2)
 [node name="bandido" type="CharacterBody2D"]
 script = ExtResource("1_r4nfx")
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(-41, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(-5, 1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-3, -3, 7, 9)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.25, 1.5)
 shape = SubResource("RectangleShape2D_7cxj6")

@@ -17,5 +17,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Narrativa" parent="UI" groups=["narrative_ui"] instance=ExtResource("2_0adhd")]
+
+[node name="Overlay" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

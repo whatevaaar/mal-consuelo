@@ -521,7 +521,7 @@ position = Vector2(-11, 9)
 position = Vector2(35, 7)
 
 [node name="bandido" parent="." instance=ExtResource("2_fnp1u")]
-position = Vector2(86, -4)
+position = Vector2(76, 5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(65, 8)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bol5mk55gcp2o"]
+[gd_scene load_steps=12 format=3 uid="uid://bol5mk55gcp2o"]
 
 [ext_resource type="Texture2D" uid="uid://ca4emk6twrfl6" path="res://assets/sprites/sprite_9581.png" id="1_5qb2f"]
 [ext_resource type="Script" uid="uid://dl5rd446fifgx" path="res://scripts/personajes/jugador.gd" id="1_obvt7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c8hkuapssrado" path="res://assets/sprites/sprite_9583.png" id="3_obvt7"]
 [ext_resource type="Texture2D" uid="uid://ch8sa6ii2x3vm" path="res://assets/sprites/sprite_9584.png" id="4_ibdfn"]
 [ext_resource type="PackedScene" uid="uid://cohbvn05xs52u" path="res://escenas/ui/punteria.tscn" id="7_ibdfn"]
+[ext_resource type="Texture2D" uid="uid://dau3e2yy7sv8" path="res://assets/sprites/sprite_0201.png" id="7_njudt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_574y0"]
 animations = [{
@@ -39,6 +40,14 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_njudt")
+}],
+"loop": true,
+"name": &"muerte",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v5a5"]
@@ -53,7 +62,7 @@ script = ExtResource("1_obvt7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_574y0")
-animation = &"disparo"
+animation = &"muerte"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.25)

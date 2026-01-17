@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
+#Señales
+signal muerte
+
 #Constantes
-const SPEED = 300.0
+const SPEED = 60.0
 const JUMP_VELOCITY = -400.0
 
 #Propiedades
-var alive := true
+var vivo := true
 var apuntando:= false
 var current_target = null
 
@@ -25,25 +28,50 @@ func _ready() -> void:
 	for enemy in get_tree().get_nodes_in_group("enemigos"):
 		enemy.connect("clicked", Callable(self, "_on_enemy_clicked"))
 
+func _physics_process(_delta: float) -> void:
+	if apuntando or not vivo:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
+	var x := Input.get_action_strength("derecha") - Input.get_action_strength("izquierda")
+	var y := Input.get_action_strength("abajo") - Input.get_action_strength("arriba")
+
+	var dir := Vector2(x, y)
+
+	# FLIP según dirección X
+	if dir.x != 0:
+		animation_player.flip_h = dir.x < 0
+
+	if dir != Vector2.ZERO:
+		velocity = dir.normalized() * SPEED
+		_play_caminando()
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+		_play_idle()
+
+	move_and_slide()
+
+
+#Animaciones
 func _play_disparo()-> void:
 	animation_player.play("disparo")
 
 func _play_idle()-> void:
-	animation_player.play("idle")
+	if animation_player.animation != "idle":
+		animation_player.play("idle")
 	
-func _physics_process(_delta: float) -> void:
-	if apuntando:
-		return
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+func _play_muerte()-> void:
+	animation_player.play("muerte")
 
-	move_and_slide()
+func _play_caminando()-> void:
+	if animation_player.animation != "caminando":
+		animation_player.play("caminando")
 
+
+#Apuntar y disparar
 func _on_enemy_clicked(enemy):
-	if not alive or apuntando:
+	if not vivo or apuntando:
 		return
 	current_target = enemy
 	apuntando = true
@@ -69,6 +97,8 @@ func _disparar_bala(success: bool):
 	get_tree().current_scene.add_child(bala)
 
 
+#Pa acá vamos todos
 func morir():
-	alive = false
-	queue_free()
+	vivo = false
+	_play_muerte()
+	emit_signal("muerte")

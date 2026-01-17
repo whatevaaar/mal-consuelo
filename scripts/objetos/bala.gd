@@ -22,7 +22,7 @@ func _on_hit(body: Node):
 		return
 
 	if body.is_in_group("jugador") and tirador != body:
-		_damage(body)
+		body.morir()
 		queue_free()
 		return
 
