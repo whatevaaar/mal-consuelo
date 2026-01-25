@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Estado="*res://global/estado.gd"
 LevelManager="*res://global/level_manager.gd"
+Historia="*res://scripts/sistemas/historia.gd"
 
 [display]
 

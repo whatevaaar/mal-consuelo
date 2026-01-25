@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://rhegfqks2iha"]
+
+[ext_resource type="Script" uid="uid://c7pmsujbpobxv" path="res://scripts/ui/pantalla_final.gd" id="1_yvpap"]
+[ext_resource type="Theme" uid="uid://dkhuh8afmfku" path="res://assets/themes/tema_retro.tres" id="2_8dwcc"]
+[ext_resource type="Texture2D" uid="uid://bhqhj5vie73ym" path="res://assets/sprites/sprite_8042.png" id="3_hgbbg"]
+
+[node name="PantallaFinal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yvpap")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Encabezado" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme = ExtResource("2_8dwcc")
+theme_override_font_sizes/normal_font_size = 51
+text = "Has Muerto"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(579, 575)
+scale = Vector2(12.208331, 11.916667)
+texture = ExtResource("3_hgbbg")
+
+[node name="Cuerpo" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_8dwcc")
+theme_override_font_sizes/font_size = 24
+text = "Intentar de nuevo"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
